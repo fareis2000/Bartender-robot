@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<title>Controle das Bombas</title>
-<link rel="stylesheet" href="../static/Style.css">
+    <meta charset="UTF-8">
+    <title>Bartender Automático</title>
+    <link rel="stylesheet" href="../static/Style.css">
 </head>
-<body>
-  <h1>Controle Bluetooth - Bombas Peristálticas</h1>
-  <div class="container">
-    <button onclick="fetch('/soda/italiana')">Preparar soda italiana</button>
-    <button onclick="fetch('/b1/off')">Desligar Bomba 1</button><br>
-    <button onclick="fetch('/b2/on')">Ligar Bomba 2</button>
-    <button onclick="fetch('/b2/off')">Desligar Bomba 2</button>
-  </div>
+<body>  
+    <h1>Bartender Automático</h1>
+    <div class="drinks-container">
+        <div class="drink-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxyR2Cy6EaL2-4RJQHTltgT7WE58z8DPGs4A&s" alt="Soda Italiana">
+            <h2>Soda Italiana</h2>
+            <p>Bebida refrescante com xarope de frutas e água com gás</p>
+            <button onclick="fetch('/drinks/soda-italiana')">Preparar</button>
+        </div>
+
+        <div class="drink-card">
+            <img src="https://images.unsplash.com/photo-1621263764928-df1444c5e859" alt="Limonada">
+            <h2>Limonada</h2>
+            <p>Clássica limonada com toque especial</p>
+            <button onclick="fetch('/drinks/limonada')">Preparar</button>
+        </div>
+
+        <div class="drink-card">
+            <img src="https://images.unsplash.com/photo-1546173159-315724a31696" alt="Mix de Frutas Vermelhas">
+            <h2>Mix de Frutas Amarelas</h2>
+            <p>Mistura especial de frutas vermelhas</p>
+            <button onclick="fetch('/drinks/frutas-vermelhas')">Preparar</button>
+        </div>
+    </div>
 </body>
 </html>
