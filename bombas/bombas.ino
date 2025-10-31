@@ -76,13 +76,10 @@ void loop() {
 
 
 void sodaitaliana(){
-  digitalWrite(bomba2Pin, LOW);
-  delay(1000);
-  digitalWrite(bomba2Pin, HIGH);
-  delay(1000);
-  digitalWrite(bomba1Pin, LOW);
-  delay(5000);
-  digitalWrite(bomba1Pin, HIGH);
-  
-  
+  if (Serial.available()){
+    Serial.print("Funciona");
+    if(Serial.read() == "U"){
+      digitalWrite(tranca, HIGH);
+    }
+  }
 }
