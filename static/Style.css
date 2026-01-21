@@ -119,3 +119,215 @@ h1 {
     .drink-card img { height: 140px; }
     .drinks-container { gap: 18px; }
 }
+
+/* ===== Responsividade aprimorada ===== */
+
+/* Tipografia fluida */
+html {
+	/* evita que fontes fiquem muito pequenas/grandes em telas extremas */
+	font-size: clamp(14px, 1.25vw + 12px, 18px);
+}
+
+/* H1 fluido */
+h1 {
+	/* substitui valor fixo por valor fluido compatível com o existente */
+	font-size: clamp(1.5rem, 3.2vw, 2.6rem);
+}
+
+/* Grid mais adaptável e espaçamentos fluídos */
+.drinks-container {
+	/* reduz o min width de cards em telas menores e torna gaps responsivos */
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: clamp(12px, 2.2vw, 28px);
+	padding: clamp(12px, 2vw, 20px);
+	max-width: 1200px;
+}
+
+/* Cards: padding e escala responsiva */
+.drink-card {
+	padding: clamp(12px, 1.6vw, 18px);
+	border-radius: clamp(10px, 1.2vw, 16px);
+}
+
+/* Imagens: usar aspect-ratio + clamp para manter proporção responsiva */
+.drink-card img {
+	/* fallback para navegadores sem aspect-ratio; clamp garante limites */
+	height: auto;
+	aspect-ratio: 16/9;
+	max-height: clamp(110px, 22vh, 220px);
+	width: 100%;
+	object-fit: cover;
+	border-radius: 10px;
+}
+
+/* Botões: largura total em telas menores para melhor usabilidade */
+.drink-card button {
+	width: 100%;
+	font-size: clamp(0.95rem, 1.2vw, 1rem);
+	padding: clamp(10px, 1.2vw, 12px);
+}
+
+/* Pequenos ajustes para sombras/interação em telas very-small */
+@media (max-width: 420px) {
+	.drink-card {
+		box-shadow: 0 8px 22px rgba(255,120,60,0.12);
+	}
+}
+
+/* Background e posições para tablets/laptops */
+@media (max-width: 1024px) {
+	body {
+		/* evita que SVG de coqueiros corte demais em telas médias */
+		background-size: 110% auto, 45% 28%, cover;
+		background-position: center top, center 15%, center;
+	}
+	.drinks-container { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+}
+
+/* Ajustes para telas menores (tablets e celulares grandes) */
+@media (max-width: 800px) {
+	h1 { font-size: clamp(1.6rem, 3.6vw, 1.95rem); }
+	.drink-card img { max-height: clamp(140px, 24vh, 180px); aspect-ratio: 16/9; }
+}
+
+/* Mobile: empilhar, reduzir padding e ajustar background para não cortar elementos visuais */
+@media (max-width: 480px) {
+	body {
+		padding: 14px;
+		background-size: 120% auto, 60% 35%, cover;
+		background-position: center -10px, center 18%, center;
+	}
+	.drinks-container {
+		grid-template-columns: 1fr;
+		gap: 14px;
+		padding: 10px;
+	}
+	.drink-card {
+		padding: 12px;
+	}
+	.drink-card img {
+		max-height: clamp(110px, 28vh, 160px);
+		aspect-ratio: 4/3;
+	}
+	.drink-card button {
+		font-size: 0.98rem;
+		padding: 12px;
+		width: 100%;
+	}
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+	h1 { font-size: 1.45rem; }
+	body { padding: 10px; }
+	.drink-card { border-radius: 12px; }
+}
+
+/* Forçar uma coluna única em dispositivos móveis (telefones) */
+@media (max-width: 600px), (pointer: coarse) {
+	.drinks-container {
+		grid-template-columns: 1fr !important; /* um por linha */
+		gap: 12px;
+		padding: 10px;
+	}
+
+	.drink-card {
+		width: 100%;
+		max-width: none;
+		margin: 0;
+		padding: 12px;
+		border-radius: 12px;
+	}
+
+	.drink-card img {
+		width: 100%;
+		height: auto;
+		max-height: none;
+		aspect-ratio: auto;
+		margin-bottom: 12px;
+	}
+
+	.drink-card button {
+		width: 100% !important;
+		margin: 0;
+		padding: 12px;
+		box-sizing: border-box;
+	}
+}
+
+/* ===== POPUP / MODAL – DRINK PRONTO ===== */
+
+.modal {
+	display: none;
+	position: fixed;
+	inset: 0;
+	z-index: 9999;
+	background: rgba(0, 0, 0, 0.55);
+	backdrop-filter: blur(4px);
+	justify-content: center;
+	align-items: center;
+}
+
+.modal-content {
+	background: linear-gradient(
+		180deg,
+		rgba(255, 255, 255, 0.92) 0%,
+		rgba(255, 245, 235, 0.88) 100%
+	);
+	border-radius: 18px;
+	padding: 28px 24px;
+	text-align: center;
+	max-width: 340px;
+	width: 90%;
+	color: #3a271b;
+	box-shadow: 0 20px 60px rgba(255, 120, 60, 0.35);
+	border: 1px solid rgba(255, 255, 255, 0.8);
+	animation: popupIn 0.35s ease;
+}
+
+/* Ícone / título */
+.modal-content h2 {
+	margin: 0 0 8px;
+	font-size: 1.6rem;
+	color: #ff6b3a;
+}
+
+/* Texto */
+.modal-content p {
+	margin: 10px 0 18px;
+	font-size: 1rem;
+	color: #5a4436;
+	line-height: 1.4;
+}
+
+/* Botão */
+.modal-content button {
+	width: 100%;
+	padding: 12px;
+	font-size: 1rem;
+	font-weight: 700;
+	color: #fff;
+	background: linear-gradient(90deg, #ff9a3c, #ff6b3a, #ff4b2b);
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+	box-shadow: 0 8px 20px rgba(255, 110, 50, 0.25);
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.modal-content button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 12px 30px rgba(255, 110, 50, 0.32);
+}
+
+/* Animação */
+@keyframes popupIn {
+	from {
+		transform: scale(0.75);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
