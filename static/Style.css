@@ -1,326 +1,206 @@
-/* Tema tropical: gradiente de pôr-do-sol + coqueiros brancos em SVG embutido */
+/* ================= VARIÁVEIS GLOBAIS ================= */
+:root {
+	--sun-1: #ff9a3c;
+	--sun-2: #ff6b3a;
+	--sun-3: #ff4b2b;
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    min-height: 100vh;
-    margin: 0;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #1b1b1b;
-    /* Camadas de fundo: SVG dos coqueiros por cima, círculo suave do sol no meio, gradiente por baixo */
-    background-image:
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'><g fill='white' opacity='0.18'><path d='M120 620 C140 480 170 380 250 320 C230 280 290 260 340 300 C370 240 440 220 500 270 C520 240 580 220 640 260 C580 290 540 340 520 390 C480 350 440 320 400 340 C380 300 320 300 280 340 C260 420 230 540 120 620 Z' /><rect x='230' y='540' width='14' height='180' rx='8' transform='rotate(-10 237 630)' /><path d='M1080 620 C1060 480 1030 380 950 320 C970 280 910 260 860 300 C830 240 760 220 700 270 C680 240 620 220 560 260 C620 290 660 340 680 390 C720 350 760 320 800 340 C820 300 880 300 920 340 C940 420 970 540 1080 620 Z' /><rect x='740' y='540' width='14' height='180' rx='8' transform='rotate(10 747 630)' /></g></svg>"),
-      radial-gradient(circle at 50% 16%, rgba(255,230,140,0.35) 0%, rgba(255,150,60,0.03) 30%),
-      linear-gradient(180deg, #ffd08a 0%, #ff9a54 40%, #ff6b3a 70%, #ff4b2b 100%);
-    background-repeat: no-repeat, no-repeat, no-repeat;
-    background-position: center top, center 15%, center;
-    background-size: 90% auto, 40% 30%, cover;
-    transition: background 0.5s ease;
+	--text-dark: #3a271b;
+	--text-light: #5a4436;
+
+	--card-bg: rgba(255, 255, 255, 0.85);
+	--glass-border: rgba(255, 255, 255, 0.8);
 }
 
-/* Cabeçalho */
-h1 {
-    font-size: 2.6rem;
-    margin: 10px 0 20px 0;
-    color: #2c1f12;
-    text-shadow: 0 6px 20px rgba(255,160,90,0.12);
+/* ================= RESET BÁSICO ================= */
+* {
+	box-sizing: border-box;
 }
 
-/* Container geral dos cards */
-.drinks-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 28px;
-    padding: 20px;
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-}
-
-/* Card do drink */
-.drink-card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.75) 100%);
-    color: #2b1f14;
-    border-radius: 16px;
-    padding: 18px;
-    text-align: center;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    box-shadow: 0 10px 30px rgba(255,120,60,0.12);
-    border: 1px solid rgba(255,255,255,0.8);
-    backdrop-filter: blur(6px);
-}
-
-/* Elevação no hover */
-.drink-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 18px 50px rgba(255,120,60,0.18);
-}
-
-/* Imagens dos cards */
-.drink-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 14px;
-    border: 1px solid rgba(0,0,0,0.06);
-}
-
-/* Títulos e descrição */
-.drink-card h2 {
-    margin: 6px 0;
-    font-size: 1.3rem;
-    color: #3a271b;
-}
-
-.drink-card p {
-    margin: 10px 0 18px;
-    color: #5a4436;
-    font-size: 0.96rem;
-    line-height: 1.4;
-}
-
-/* Botões tropicais */
-.drink-card button {
-    width: 85%;
-    margin: 0 auto;
-    padding: 12px 18px;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #fff;
-    background: linear-gradient(90deg, #ff9a3c 0%, #ff6b3a 50%, #ff4b2b 100%);
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    box-shadow: 0 8px 20px rgba(255,110,50,0.18);
-}
-
-.drink-card button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(255,110,50,0.22);
-}
-
-.drink-card button:active {
-    transform: translateY(0);
-    box-shadow: 0 6px 16px rgba(255,110,50,0.16);
-}
-
-/* Responsividade */
-@media (max-width: 800px) {
-    .drink-card img { height: 160px; }
-    h1 { font-size: 1.9rem; }
-}
-
-@media (max-width: 480px) {
-    body { padding: 18px; }
-    .drink-card img { height: 140px; }
-    .drinks-container { gap: 18px; }
-}
-
-/* ===== Responsividade aprimorada ===== */
-
-/* Tipografia fluida */
 html {
-	/* evita que fontes fiquem muito pequenas/grandes em telas extremas */
 	font-size: clamp(14px, 1.25vw + 12px, 18px);
 }
 
-/* H1 fluido */
+body {
+	margin: 0;
+	padding: clamp(14px, 2vw, 30px);
+	min-height: 100vh;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: var(--text-dark);
+
+	/* Background em camadas */
+	background-image:
+		url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'><g fill='white' opacity='0.18'><path d='M120 620 C140 480 170 380 250 320 C230 280 290 260 340 300 C370 240 440 220 500 270 C520 240 580 220 640 260 C580 290 540 340 520 390 C480 350 440 320 400 340 C380 300 320 300 280 340 C260 420 230 540 120 620 Z' /><rect x='230' y='540' width='14' height='180' rx='8' transform='rotate(-10 237 630)' /><path d='M1080 620 C1060 480 1030 380 950 320 C970 280 910 260 860 300 C830 240 760 220 700 270 C680 240 620 220 560 260 C620 290 660 340 680 390 C720 350 760 320 800 340 C820 300 880 300 920 340 C940 420 970 540 1080 620 Z' /><rect x='740' y='540' width='14' height='180' rx='8' transform='rotate(10 747 630)' /></g></svg>"),
+		radial-gradient(circle at 50% 16%, rgba(255,230,140,0.35), rgba(255,150,60,0.03) 35%),
+		linear-gradient(180deg, #ffd08a, #ff9a54 40%, #ff6b3a 70%, #ff4b2b);
+
+	background-repeat: no-repeat;
+	background-position: center top, center 15%, center;
+	background-size: 95% auto, 40% 30%, cover;
+}
+
+/* ================= TÍTULO ================= */
 h1 {
-	/* substitui valor fixo por valor fluido compatível com o existente */
-	font-size: clamp(1.5rem, 3.2vw, 2.6rem);
+	margin: 12px 0 24px;
+	font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+	text-align: center;
+	color: #2c1f12;
 }
 
-/* Grid mais adaptável e espaçamentos fluídos */
+/* ================= GRID DE DRINKS ================= */
 .drinks-container {
-	/* reduz o min width de cards em telas menores e torna gaps responsivos */
-	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-	gap: clamp(12px, 2.2vw, 28px);
-	padding: clamp(12px, 2vw, 20px);
-	max-width: 1200px;
-}
-
-/* Cards: padding e escala responsiva */
-.drink-card {
-	padding: clamp(12px, 1.6vw, 18px);
-	border-radius: clamp(10px, 1.2vw, 16px);
-}
-
-/* Imagens: usar aspect-ratio + clamp para manter proporção responsiva */
-.drink-card img {
-	/* fallback para navegadores sem aspect-ratio; clamp garante limites */
-	height: auto;
-	aspect-ratio: 16/9;
-	max-height: clamp(110px, 22vh, 220px);
 	width: 100%;
-	object-fit: cover;
-	border-radius: 10px;
+	max-width: 1200px;
+
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: clamp(14px, 2vw, 28px);
+	padding: clamp(10px, 2vw, 20px);
 }
 
-/* Botões: largura total em telas menores para melhor usabilidade */
+/* ================= CARD ================= */
+.drink-card {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+
+	background: var(--card-bg);
+	border-radius: 16px;
+	padding: clamp(12px, 1.6vw, 18px);
+
+	border: 1px solid var(--glass-border);
+	backdrop-filter: blur(6px);
+
+	box-shadow: 0 12px 32px rgba(255, 120, 60, 0.15);
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.drink-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 18px 48px rgba(255, 120, 60, 0.22);
+}
+
+/* ================= IMAGEM ================= */
+.drink-card img {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+
+	border-radius: 10px;
+	margin-bottom: 12px;
+}
+
+/* ================= TEXTO ================= */
+.drink-card h2 {
+	margin: 6px 0;
+	font-size: 1.25rem;
+	color: #3a271b;
+}
+
+.drink-card p {
+	margin: 10px 0 16px;
+	font-size: 0.95rem;
+	line-height: 1.4;
+	color: var(--text-light);
+
+	/* 🔥 garante alinhamento dos botões */
+	margin-bottom: auto;
+}
+
+/* ================= BOTÃO ================= */
 .drink-card button {
 	width: 100%;
-	font-size: clamp(0.95rem, 1.2vw, 1rem);
-	padding: clamp(10px, 1.2vw, 12px);
+	padding: 12px;
+
+	font-size: 1rem;
+	font-weight: 700;
+	color: #fff;
+
+	background: linear-gradient(
+		90deg,
+		var(--sun-1),
+		var(--sun-2),
+		var(--sun-3)
+	);
+
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+
+	box-shadow: 0 8px 20px rgba(255, 110, 50, 0.25);
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* Pequenos ajustes para sombras/interação em telas very-small */
-@media (max-width: 420px) {
-	.drink-card {
-		box-shadow: 0 8px 22px rgba(255,120,60,0.12);
-	}
+.drink-card button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 12px 28px rgba(255, 110, 50, 0.32);
 }
 
-/* Background e posições para tablets/laptops */
-@media (max-width: 1024px) {
-	body {
-		/* evita que SVG de coqueiros corte demais em telas médias */
-		background-size: 110% auto, 45% 28%, cover;
-		background-position: center top, center 15%, center;
-	}
-	.drinks-container { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.drink-card button:active {
+	transform: translateY(0);
+	box-shadow: 0 6px 16px rgba(255, 110, 50, 0.18);
 }
 
-/* Ajustes para telas menores (tablets e celulares grandes) */
-@media (max-width: 800px) {
-	h1 { font-size: clamp(1.6rem, 3.6vw, 1.95rem); }
-	.drink-card img { max-height: clamp(140px, 24vh, 180px); aspect-ratio: 16/9; }
-}
-
-/* Mobile: empilhar, reduzir padding e ajustar background para não cortar elementos visuais */
-@media (max-width: 480px) {
-	body {
-		padding: 14px;
-		background-size: 120% auto, 60% 35%, cover;
-		background-position: center -10px, center 18%, center;
-	}
-	.drinks-container {
-		grid-template-columns: 1fr;
-		gap: 14px;
-		padding: 10px;
-	}
-	.drink-card {
-		padding: 12px;
-	}
-	.drink-card img {
-		max-height: clamp(110px, 28vh, 160px);
-		aspect-ratio: 4/3;
-	}
-	.drink-card button {
-		font-size: 0.98rem;
-		padding: 12px;
-		width: 100%;
-	}
-}
-
-/* Very small phones */
-@media (max-width: 360px) {
-	h1 { font-size: 1.45rem; }
-	body { padding: 10px; }
-	.drink-card { border-radius: 12px; }
-}
-
-/* Forçar uma coluna única em dispositivos móveis (telefones) */
-@media (max-width: 600px), (pointer: coarse) {
-	.drinks-container {
-		grid-template-columns: 1fr !important; /* um por linha */
-		gap: 12px;
-		padding: 10px;
-	}
-
-	.drink-card {
-		width: 100%;
-		max-width: none;
-		margin: 0;
-		padding: 12px;
-		border-radius: 12px;
-	}
-
-	.drink-card img {
-		width: 100%;
-		height: auto;
-		max-height: none;
-		aspect-ratio: auto;
-		margin-bottom: 12px;
-	}
-
-	.drink-card button {
-		width: 100% !important;
-		margin: 0;
-		padding: 12px;
-		box-sizing: border-box;
-	}
-}
-
-/* ===== POPUP / MODAL – DRINK PRONTO ===== */
-
+/* ================= MODAL ================= */
 .modal {
-	display: none;
 	position: fixed;
 	inset: 0;
 	z-index: 9999;
-	background: rgba(0, 0, 0, 0.55);
-	backdrop-filter: blur(4px);
+
+	display: none;
 	justify-content: center;
 	align-items: center;
+
+	background: rgba(0, 0, 0, 0.55);
+	backdrop-filter: blur(4px);
+}
+
+.modal.active {
+	display: flex;
 }
 
 .modal-content {
 	background: linear-gradient(
 		180deg,
-		rgba(255, 255, 255, 0.92) 0%,
-		rgba(255, 245, 235, 0.88) 100%
+		rgba(255, 255, 255, 0.95),
+		rgba(255, 245, 235, 0.9)
 	);
+
+	padding: 26px 24px;
 	border-radius: 18px;
-	padding: 28px 24px;
 	text-align: center;
+
 	max-width: 340px;
 	width: 90%;
-	color: #3a271b;
+
+	border: 1px solid var(--glass-border);
 	box-shadow: 0 20px 60px rgba(255, 120, 60, 0.35);
-	border: 1px solid rgba(255, 255, 255, 0.8);
+
 	animation: popupIn 0.35s ease;
 }
 
-/* Ícone / título */
 .modal-content h2 {
 	margin: 0 0 8px;
 	font-size: 1.6rem;
-	color: #ff6b3a;
+	color: var(--sun-2);
 }
 
-/* Texto */
 .modal-content p {
 	margin: 10px 0 18px;
 	font-size: 1rem;
-	color: #5a4436;
-	line-height: 1.4;
+	color: var(--text-light);
 }
 
-/* Botão */
 .modal-content button {
 	width: 100%;
 	padding: 12px;
-	font-size: 1rem;
-	font-weight: 700;
-	color: #fff;
-	background: linear-gradient(90deg, #ff9a3c, #ff6b3a, #ff4b2b);
-	border: none;
-	border-radius: 10px;
-	cursor: pointer;
-	box-shadow: 0 8px 20px rgba(255, 110, 50, 0.25);
-	transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.modal-content button:hover {
-	transform: translateY(-2px);
-	box-shadow: 0 12px 30px rgba(255, 110, 50, 0.32);
-}
-
-/* Animação */
+/* ================= ANIMAÇÃO ================= */
 @keyframes popupIn {
 	from {
 		transform: scale(0.75);
@@ -329,5 +209,18 @@ h1 {
 	to {
 		transform: scale(1);
 		opacity: 1;
+	}
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 600px) {
+	.drinks-container {
+		grid-template-columns: 1fr;
+		padding: 10px;
+	}
+
+	body {
+		background-size: 120% auto, 60% 35%, cover;
+		background-position: center -10px, center 18%, center;
 	}
 }
